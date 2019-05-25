@@ -1,21 +1,35 @@
 import Taro, { Component } from '@tarojs/taro'
 import { View, Text, Button } from '@tarojs/components'
-import './index.less'
-import child from './child.js'
+import { AtButton } from 'taro-ui'
+import { connect } from '@tarojs/redux'
 
-export default class Index extends Component {
+import { add, minus, asyncAdd } from '../../actions/counter'
+
+import './index.scss'
+
+
+@connect(({ counter }) => ({
+  counter
+}), (dispatch) => ({
+  add() {
+    dispatch(add())
+  },
+  dec() {
+    dispatch(minus())
+  },
+  asyncAdd() {
+    dispatch(asyncAdd())
+  }
+}))
+class Index extends Component {
 
   config = {
     navigationBarTitleText: '首页'
   }
-  state = {
-    name: "张三",
-    childName: "笨咪咪",
+
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props, nextProps)
   }
-
-  componentWillMount() { }
-
-  componentDidMount() { }
 
   componentWillUnmount() { }
 
@@ -23,22 +37,18 @@ export default class Index extends Component {
 
   componentDidHide() { }
 
-  click() {
-    this.setState({ name: "李四" }, () => {
-      console.log(this.state.name);
-    });
-  }
-  change() {
-    this.setState({childName:"是傻逼"})
-  }
-
   render() {
     return (
       <View className='index'>
-        <Button onClick={this.click}>更改名字</Button>
-        <Text>{this.state.name}</Text>
-        <child name={this.state.childName} onChange={this.change.bind(this)}></child>
+        <View><AtButton type="primary">按钮文案</AtButton></View>
+        <Button className='add_btn' onClick={this.props.add}>+</Button>
+        <Button className='dec_btn' onClick={this.props.dec}>-</Button>
+        <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
+        <View><Text>{this.props.counter.num}</Text></View>
+        <View><Text>Hello, World</Text></View>
       </View>
     )
   }
 }
+
+export default Index

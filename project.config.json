@@ -1,16 +1,13 @@
 {
-	"miniprogramRoot": "dist/",
-	"projectname": "firstapp",
-	"description": "this is a taro project",
-	"appid": "touristappid",
-	"setting": {
-		"urlCheck": true,
-		"es6": false,
-		"postcss": false,
-		"minified": false
-	},
-	"compileType": "miniprogram",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
-	"condition": {}
+  "miniprogramRoot": "./dist",
+  "projectname": "myApp",
+  "description": "first taro",
+  "appid": "touristappid",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
 }
